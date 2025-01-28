@@ -1,7 +1,7 @@
 
 # Predicción de Temperatura con Regresión Lineal
 
-Este proyecto utiliza un modelo de regresión lineal para predecir la temperatura del siguiente día basado en los últimos 10 días de registros de temperatura. El modelo utiliza Python y bibliotecas comunes de machine learning.
+Este proyecto utiliza un modelo de regresión lineal para predecir la temperatura promedio del siguiente día basado en los últimos 10 días de registros de temperatura promedio. El modelo utiliza Python y bibliotecas comunes de machine learning.
 
 ---
 
@@ -29,13 +29,14 @@ pip install numpy pandas scikit-learn matplotlib
 ```
 .
 ├── data/
-│   └── dataset.csv     # Archivo con los registros históricos de temperatura
-├── src/
-│   ├── train_model.py  # Script principal para entrenar el modelo
-│   ├── predict.py      # Script para realizar predicciones
-│   └── utils.py        # Funciones auxiliares
-├── README.md           # Archivo de documentación
-└── requirements.txt    # Dependencias del proyecto
+│   └── weather01.txt     # Archivo con los registros históricos de mediciones climatologicas 
+│   └── weather02.txt     # Archivo con los registros históricos de mediciones climatologicas 
+│   └── weather03.txt     # Archivo con los registros históricos de mediciones climatologicas 
+│   └── weather04.txt     # Archivo con los registros históricos de mediciones climatologicas 
+│   └── weather05.txt     # Archivo con los registros históricos de mediciones climatologicas 
+│   └── weather06.txt     # Archivo con los registros históricos de mediciones climatologicas 
+├── proyect.ipynb         # Script principal para entrenar el modelo en un notebook de Jupiter
+├── README.md             # Archivo de documentación
 ```
 
 ---
@@ -43,7 +44,7 @@ pip install numpy pandas scikit-learn matplotlib
 ## **Uso**
 
 ### 1. **Preparación de los datos**
-Asegúrate de que el archivo `dataset.csv` en la carpeta `data` contenga una columna llamada `temperatura` con las temperaturas diarias en formato cronológico.
+Asegúrate de que los archivos weather0X.txt en la carpeta `data` esten combinados y los datos de temperatura esten presentes.
 
 Ejemplo de contenido del archivo:
 
@@ -56,25 +57,20 @@ Ejemplo de contenido del archivo:
 | ...         |
 
 ### 2. **Entrenamiento del modelo**
-Ejecuta el script `train_model.py` para entrenar el modelo con el conjunto de datos.
+El entrenamiento se ejecuta dentro del notebook de Jupiter project.ipynb
 
-```bash
-python src/train_model.py
-```
 
 Este script:
 
-- Carga el conjunto de datos desde `data/dataset.csv`.
+- Carga el conjunto de datos desde `data`.
+- Realiza la combinacion de archivo y la limpieza de datos.
 - Genera características basadas en ventanas deslizantes de los últimos 10 días.
 - Entrena un modelo de regresión lineal.
-- Guarda el modelo entrenado como un archivo `.pkl` para uso posterior.
 
 ### 3. **Realizar una predicción**
-Para predecir la temperatura del siguiente día utilizando los últimos 10 días, ejecuta el script `predict.py`:
+Para predecir la temperatura del siguiente día utilizando los últimos 10 días:
 
-```bash
-python src/predict.py
-```
+- Correr el ultimo script del notebook.
 
 El resultado será similar a:
 
@@ -127,7 +123,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 model = LinearRegression()
 model.fit(X_train, y_train)
 
-# Guardar el modelo entrenado (opcional)
+# Guardar el modelo entrenado 
 import joblib
 joblib.dump(model, "src/model.pkl")
 ```
@@ -135,7 +131,6 @@ joblib.dump(model, "src/model.pkl")
 ### **Predicción**
 
 ```python
-import joblib
 import pandas as pd
 import numpy as np
 
